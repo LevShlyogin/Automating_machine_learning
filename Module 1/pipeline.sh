@@ -20,14 +20,14 @@ python3 data_creation.py
 echo "data_creation.py Done!"
 sleep 5
 
-echo "Выполняем предобработку данных"
-python3 model_preparation.py
-echo "model_preparation.py Done!"
-sleep 5
-
 echo "Создаем и обучаем модель машинного обучения на построенных данных из папки train"
 python3 model_preprocessing.py
 echo "model_preprocessing.py Done!"
+sleep 5
+
+echo "Выполняем предобработку данных"
+python3 model_preparation.py
+echo "model_preparation.py Done!"
 sleep 5
 
 echo "Проверяем модель машинного обучения на построенных данных из папки test"
