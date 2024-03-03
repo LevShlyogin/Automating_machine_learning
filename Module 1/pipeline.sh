@@ -18,19 +18,19 @@ unzip -o quicker-car-cleaned-dataset.zip -d dataset/quicker-car-cleaned-dataset
 echo "Запускаем Python-скрипт для получения данных"
 python3 data_creation.py
 echo "data_creation.py Done!"
-sleep 5
+sleep 3
 
 echo "Создаем и обучаем модель машинного обучения на построенных данных из папки train"
 python3 model_preprocessing.py
 echo "model_preprocessing.py Done!"
-sleep 5
+sleep 3
 
 echo "Выполняем предобработку данных"
 python3 model_preparation.py
 echo "model_preparation.py Done!"
-sleep 5
+sleep 3
 
 echo "Проверяем модель машинного обучения на построенных данных из папки test"
 python3 model_testing.py
 echo "model_testing.py Done!"
-sleep 5
+sleep 3
