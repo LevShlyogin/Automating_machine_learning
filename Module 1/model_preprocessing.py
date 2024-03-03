@@ -1,26 +1,25 @@
-from sklearn.preprocessing import MinMaxScaler
-import os
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from data_creation import df_se
+from sklearn.preprocessing import StandardScaler
 
-# Определяем X и y, нам нужно предсказать цену
-y = df_se["Price"]
-X = df_se.drop(["Price"], axis = 1)
+# Загружаем данные для предобработки
+train_data = pd.read_csv('dataset/train/train_data.csv')
+test_data = pd.read_csv('dataset/test/test_data.csv')
 
-# Делим данные на тестовую и тренировочную выборки
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+# Разделяем предикторы и целевую переменную
+X_train = train_data.drop(["Price"], axis=1)
+y_train = train_data["Price"]
+X_test = test_data.drop(["Price"], axis=1)
+y_test = test_data["Price"]
 
-# Сохраняем тренировочные и тестовые выборки в CSV файлы
-train_data = pd.concat([X_train, y_train], axis=1)
-test_data = pd.concat([X_test, y_test], axis=1)
+# Производим стандартизацию данных
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
 
-os.makedirs("train", exist_ok=True)
-os.makedirs("test", exist_ok=True)
 
-train_data.to_csv('train/train_data.csv', index=False)
-test_data.to_csv('test/test_data.csv', index=False)
+# Сохраняем предобработанные данные
+train_data_scaled = pd.concat([pd.DataFrame(X_train_scaled), y_train], axis=1)
+test_data_scaled = pd.concat([pd.DataFrame(X_test_scaled), y_test], axis=1)
 
-scaler = MinMaxScaler()
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test)
+train_data_scaled.to_csv('dataset/train/train_data_scaled.csv', index=False)
+test_data_scaled.to_csv('dataset/test/test_data_scaled.csv', index=False)
