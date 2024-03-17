@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clone') {
+            steps {
+                git branch: 'Automating_machine_learning/Module 2',
+                credentialsId: 'bbca5268-5a50-4ebd-b857-4c02d282c7eb',
+                url: 'git@github.com:LevShlyogin/Automating_machine_learning.git'
+            }
+        }
+
+        stage('Prepare') {
+            steps {
+                sh 'python3 model/data_creation.py'
+            }
+        }
+
+        stage('Dependencies') {
+            steps{
+                sh 'cd Module 2'
+                sh 'python3 --version'
+                sh 'pip install nvidia-pyindex'
+                sh 'python3 -m pip install -r requirements.txt'
+            }
+        }
+
+        stage('Preprocessing') {
+            steps{
+                sh 'python3 model/data_preprocessing.py'
+            }
+        }
+
+        stage('Train') {
+            steps{
+                sh 'python3 model/model_preparation.py'
+            }
+        }
+
+        stage('Test') {
+            steps{
+                sh 'python3 -m unittest model/model_testing.py'
+            }
+        }
+    }
+}
