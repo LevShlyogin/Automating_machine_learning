@@ -2,7 +2,7 @@ import pandas as pd
 import os
 from sklearn.model_selection import train_test_split
 
-data = pd.read_csv('dataset/quicker-car-cleaned-dataset/cleaned_car.csv', delimiter = ',', index_col=0)
+data = pd.read_csv('Module 2/model/dataset/quicker-car-cleaned-dataset/cleaned_car.csv', delimiter = ',', index_col=0)
 
 # Смотрим на типы данных
 cat_columns = []
