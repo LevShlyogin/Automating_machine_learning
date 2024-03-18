@@ -1,44 +1,43 @@
 pipeline {
     agent any
+
+
     stages {
-        stage('Clone') {
+        
+        stage('Клонирование репозитория') {
             steps {
-                git branch: 'Automating_machine_learning/Module 2',
-                credentialsId: 'bbca5268-5a50-4ebd-b857-4c02d282c7eb',
-                url: 'git@github.com:LevShlyogin/Automating_machine_learning.git'
+                git branch: 'main', url: 'https://github.com/LevShlyogin/Automating_machine_learning.git'
             }
         }
-
-        stage('Prepare') {
+        
+        stage('Установка библиотек и зависимостей') {
             steps {
-                sh 'python3 model/data_creation.py'
+                sh 'pip install -r "Module 2/model/requirements.txt"'
             }
         }
 
-        stage('Dependencies') {
-            steps{
-                sh 'cd Module 2'
-                sh 'python3 --version'
-                sh 'pip install nvidia-pyindex'
-                sh 'python3 -m pip install -r requirements.txt'
+        
+        stage('Запуск Python-скрипта для подготовки данных') {
+            steps {
+                sh 'python3 "Module 2/model/data_creation.py"'
             }
         }
 
-        stage('Preprocessing') {
-            steps{
-                sh 'python3 model/data_preprocessing.py'
+        stage('Создание модели машинного обучения') {
+            steps {
+                sh 'python3 "Module 2/model/model_preprocessing.py"'
+            }
+        }
+        
+        stage('Обучение модели машинного обучения') {
+            steps {
+                sh 'python3 "Module 2/model//model_preparation.py"'
             }
         }
 
-        stage('Train') {
-            steps{
-                sh 'python3 model/model_preparation.py'
-            }
-        }
-
-        stage('Test') {
-            steps{
-                sh 'python3 -m unittest model/model_testing.py'
+        stage('Проверка модели машинного обучения') {
+            steps {
+                sh 'python3 "Module 2/model/model_testing.py"'
             }
         }
     }
