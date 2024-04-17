@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def start():
-    df = pd.read_csv('datasets/titanic.csv')
+    df = pd.read_csv('titanic.csv')
     print(df.head())
     ndf = df.loc[:,['Pclass', 'Sex', 'Age']]
     ndf.to_csv('passenger.csv', index=False)
