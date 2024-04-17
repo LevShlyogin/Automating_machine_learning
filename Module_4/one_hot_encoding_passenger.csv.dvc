@@ -1,0 +1,5 @@
+outs:
+- md5: adc020ef9b383c0a54987e1177d74068
+  size: 23394
+  hash: md5
+  path: one_hot_encoding_passenger.csv
