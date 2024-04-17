@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv('passenger.csv')
+df = pd.read_csv('datasets/passenger.csv')
 mean_age = df['Age'].mean()
 df['Age'] = df['Age'].fillna(mean_age)
 
