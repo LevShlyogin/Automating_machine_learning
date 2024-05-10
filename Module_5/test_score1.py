@@ -4,12 +4,12 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 @pytest.fixture()
 def load_ys():
-    ys = np.loadtxt("ys1.csv", delimiter=";")
+    ys = np.loadtxt("data/ys1.csv", delimiter=";")
     return ys
 
 @pytest.fixture()
 def load_pred():
-    pred = np.loadtxt("pred1.csv", delimiter=";")
+    pred = np.loadtxt("data/pred1.csv", delimiter=";")
     return pred
 
 def test_mse(load_ys, load_pred):
